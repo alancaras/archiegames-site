@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Archie Games</title>
+<meta name="description" content="Archie Games is an independent Australian studio making sports sims and small, useful apps. Home of Aussie Rules Footy Coach and PairCall.">
+<meta property="og:title" content="Archie — Games, Apps, Flights of Fancy…">
+<meta property="og:description" content="An independent Australian studio making sports sims and small, useful apps. Home of Aussie Rules Footy Coach and PairCall.">
+<meta property="og:image" content="https://archiegames.com.au/img/fc-keyart.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" href="img/fc-icon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Condensed:ital,wght@0,400;0,500;0,700;1,400&display=swap">
+<style>
+/* Layout: a footy record for a games studio. Charcoal ground like the app's own UI, Bebas Neue headlines,
+   Roboto Condensed body (the app's type system), pixel art left crisp, one hot-pink accent from the START GAME button. */
+:root {
+  color-scheme: dark;
+  --ink: #12161F;          /* the app's background */
+  --ink-2: #1A2030;        /* cards, phone frames */
+  --line: #2A3242;
+  --paper: #F2EEE6;        /* main text */
+  --paper-dim: #B6BCC8;    /* secondary text */
+  --pink: #FF3E8E;         /* START GAME */
+  --grass: #4CBB5C;        /* the oval */
+  --sky: #5FB3FF;          /* links */
+
+  --display: "Bebas Neue", "Oswald", "Arial Narrow", Impact, sans-serif;
+  --body: "Roboto Condensed", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --gutter: clamp(16px, 5vw, 64px);
+  --measure: 36rem;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--ink); color: var(--paper);
+  font-family: var(--body); font-size: clamp(1.02rem, 0.96rem + 0.3vw, 1.18rem); line-height: 1.5;
+  padding-inline: var(--gutter); padding-block: 0;
+}
+img { max-width: 100%; display: block; }
+a { color: var(--sky); text-decoration-color: rgba(95,179,255,0.5); text-underline-offset: 0.16em; }
+a:hover { color: var(--paper); text-decoration-color: var(--pink); }
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px solid var(--pink); outline-offset: 3px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 400; margin: 0; letter-spacing: 0.02em; text-wrap: balance; }
+p { margin: 0; }
+.eyebrow { font-family: var(--body); font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.74rem; color: var(--pink); }
+.pixel { image-rendering: pixelated; image-rendering: crisp-edges; }
+
+/* top bar */
+.top { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding-block: 1rem; border-bottom: 1px solid var(--line); }
+.top .brand { font-family: var(--display); font-size: 1.5rem; letter-spacing: 0.08em; color: var(--paper); text-decoration: none; }
+.top nav { display: flex; gap: 1.25rem; flex-wrap: wrap; justify-content: end; }
+.top nav a { font-weight: 500; font-size: 0.95rem; text-decoration: none; color: var(--paper-dim); text-transform: uppercase; letter-spacing: 0.08em; }
+.top nav a:hover { color: var(--paper); }
+
+/* hero */
+.hero { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(1.5rem, 4vw, 4rem); align-items: center; padding-block: clamp(2rem, 5vw, 4.5rem); }
+.hero h1 { font-size: clamp(5rem, 2rem + 14vw, 13rem); line-height: 0.85; letter-spacing: 0.04em; color: var(--paper); }
+.hero h1 .dot { color: var(--pink); }
+.hero .tag { font-family: var(--display); font-size: clamp(1.5rem, 1rem + 2.2vw, 2.6rem); line-height: 1.05; letter-spacing: 0.04em; color: var(--paper-dim); margin-top: 0.4em; }
+.hero .tag em { font-style: normal; color: var(--grass); }
+.hero .blurb { margin-top: 1.4rem; max-width: 30em; color: var(--paper-dim); font-size: 1.05em; }
+.hero .art { position: relative; justify-self: end; width: min(100%, 420px); }
+.hero .art img { width: 100%; height: auto; border: 1px solid var(--line); }
+.hero .art .pin { position: absolute; top: -14px; right: -14px; background: var(--pink); color: #fff; font-family: var(--display); font-size: 1.1rem; letter-spacing: 0.08em; padding: 0.35rem 0.75rem; transform: rotate(4deg); }
+
+/* section scaffolding */
+.sec { padding-block: clamp(2.5rem, 6vw, 5rem); border-top: 1px solid var(--line); }
+.sec > header { display: flex; flex-direction: column; gap: 0.6rem; max-width: var(--measure); margin-bottom: 2rem; }
+.sec h2 { font-size: clamp(2.6rem, 1.6rem + 4vw, 5rem); line-height: 0.95; }
+.sec > header p { color: var(--paper-dim); }
+
+/* footy coach */
+.fc-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(1.5rem, 4vw, 3.5rem); align-items: start; }
+.fc-copy { display: flex; flex-direction: column; gap: 1.5rem; }
+.fc-copy .lede { font-size: 1.15em; color: var(--paper); }
+.pillars { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem 1.5rem; margin: 0; padding: 0; list-style: none; }
+.pillars li { display: flex; flex-direction: column; gap: 0.3rem; border-top: 2px solid var(--grass); padding-top: 0.6rem; }
+.pillars h3 { font-size: 1.5rem; letter-spacing: 0.04em; }
+.pillars p { color: var(--paper-dim); font-size: 0.95em; }
+.stores { display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center; }
+.store {
+  display: inline-flex; flex-direction: column; gap: 0.05rem; text-decoration: none;
+  background: var(--paper); color: var(--ink); border-radius: 8px; padding: 0.5rem 1rem 0.55rem; min-width: 11rem;
+}
+.store small { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.7; }
+.store span { font-family: var(--display); font-size: 1.35rem; letter-spacing: 0.04em; line-height: 1; }
+.store:hover { background: var(--pink); color: #fff; }
+.rating { color: var(--paper-dim); font-size: 0.92em; }
+.rating b { color: var(--paper); font-weight: 700; }
+.shots { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(10px, 1.5vw, 20px); align-items: start; }
+.phone { background: var(--ink-2); border: 1px solid var(--line); border-radius: 22px; padding: 8px; }
+.phone img { border-radius: 14px; width: 100%; height: auto; }
+.shots .phone:nth-child(2) { margin-top: clamp(1.5rem, 4vw, 3.5rem); }
+.shots .phone:nth-child(3) { margin-top: clamp(0.5rem, 2vw, 1.75rem); }
+.shots .phone:nth-child(n+4) { margin-top: 0; }
+.shots .phone:nth-child(5) { margin-top: clamp(1.5rem, 4vw, 3.5rem); }
+.shots .phone:nth-child(6) { margin-top: clamp(0.5rem, 2vw, 1.75rem); }
+.fineprint { color: var(--paper-dim); font-size: 0.85em; max-width: 50em; margin-top: 1.5rem; }
+
+/* paircall */
+.pc { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(1.5rem, 4vw, 3.5rem); align-items: center; }
+.pc-head { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem; }
+.pc-head img { width: 72px; height: 72px; border-radius: 16px; }
+.pc-head h2 { font-size: clamp(2.4rem, 1.6rem + 3vw, 4rem); line-height: 0.95; }
+.pc-copy { display: flex; flex-direction: column; gap: 1.1rem; }
+.pc-copy .lede { font-size: 1.15em; }
+.pc-copy ul { margin: 0; padding-left: 1.1rem; color: var(--paper-dim); display: flex; flex-direction: column; gap: 0.35rem; }
+.pc-shots { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(10px, 1.5vw, 20px); }
+.pc-shots .phone:nth-child(2) { margin-top: clamp(1.5rem, 4vw, 3rem); }
+.soon { font-size: 0.9em; color: var(--paper-dim); }
+
+/* studio */
+.studio { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(1.5rem, 4vw, 3.5rem); align-items: center; }
+.studio .text { display: flex; flex-direction: column; gap: 1.1rem; max-width: var(--measure); }
+.studio .text p { color: var(--paper-dim); }
+.studio .text p.big { color: var(--paper); font-size: 1.15em; }
+.studio .art img { border: 1px solid var(--line); width: min(100%, 420px); margin-left: auto; }
+
+/* contact */
+.contact { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(1.5rem, 4vw, 3.5rem); align-items: start; }
+.contact .intro { display: flex; flex-direction: column; gap: 0.75rem; }
+.contact .intro p { color: var(--paper-dim); }
+.cform { display: flex; flex-direction: column; gap: 0.7rem; max-width: 34rem; }
+.cform .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+.cform label { display: flex; flex-direction: column; gap: 0.3rem; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--paper-dim); }
+.cform input, .cform textarea { font: inherit; font-size: 1rem; color: var(--paper); background: var(--ink-2); border: 1px solid var(--line); border-radius: 6px; padding: 0.6rem 0.75rem; width: 100%; min-width: 0; }
+.cform textarea { resize: vertical; min-height: 5.5rem; }
+.cform input:focus, .cform textarea:focus { outline: 2px solid var(--pink); outline-offset: 1px; border-color: var(--pink); }
+.cform .foot { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.cform button { font-family: var(--display); font-size: 1.25rem; letter-spacing: 0.08em; color: #fff; background: var(--pink); border: 0; border-radius: 6px; padding: 0.55rem 1.5rem 0.5rem; cursor: pointer; }
+.cform button:hover { background: var(--paper); color: var(--ink); }
+.cform button:disabled { opacity: 0.6; cursor: default; }
+.cform .note { color: var(--paper-dim); font-size: 0.95rem; }
+.cform .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+/* footer */
+footer { border-top: 1px solid var(--line); padding-block: 1.5rem 2.25rem; display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; color: var(--paper-dim); font-size: 0.9rem; }
+footer nav { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+footer a { color: var(--paper-dim); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero h1, .hero .tag, .hero .blurb { animation: rise 0.8s cubic-bezier(.2,.7,.2,1) both; }
+  .hero .tag { animation-delay: 0.08s; } .hero .blurb { animation-delay: 0.16s; }
+  @keyframes rise { from { opacity: 0.001; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+}
+
+@media (max-width: 900px) {
+  .hero, .fc-grid, .pc, .studio, .contact { grid-template-columns: 1fr; }
+  .hero .art { justify-self: start; width: min(100%, 360px); }
+  .studio .art img { margin-left: 0; }
+  .shots { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .top nav { gap: 0.9rem; }
+  .pillars { grid-template-columns: 1fr; }
+  .shots { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .shots .phone { margin-top: 0 !important; }
+  .cform .row2 { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <a class="brand" href="#">ARCHIE</a>
+  <nav>
+    <a href="#footy-coach">Footy Coach</a>
+    <a href="#paircall">PairCall</a>
+    <a href="#studio">Studio</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div>
+    <h1>ARCHIE<span class="dot">.</span></h1>
+    <p class="tag">Games, Apps, <em>Flights of Fancy</em>…</p>
+    <p class="blurb">An independent Australian studio building sports and management sims with heart, depth, and a bit of larrikin spirit. We make the things we'd want to use ourselves.</p>
+  </div>
+  <div class="art">
+    <img class="pixel" src="img/fc-keyart.jpg" alt="Pixel-art key art for Aussie Rules Footy Coach: a moustachioed coach in a blue tracksuit holding a red footy in front of a packed stadium" width="1290" height="1728" fetchpriority="high">
+    <span class="pin">OUT NOW</span>
+  </div>
+</section>
+
+<section class="sec" id="footy-coach">
+  <header>
+    <p class="eyebrow">Game · iOS and Android</p>
+    <h2>Aussie Rules Footy Coach</h2>
+    <p>Build the club. Coach the side. Win the flag.</p>
+  </header>
+  <div class="fc-grid">
+    <div class="fc-copy">
+      <p class="lede">The management sim for footy fans who've spent a lifetime yelling at the coach from the couch. Now it's your turn. From the draft to the grand final, every decision is yours.</p>
+      <div class="stores">
+        <a class="store" href="https://apps.apple.com/au/app/aussie-rules-footy-coach/id6764742618" rel="noopener"><small>Download on the</small><span>App Store</span></a>
+        <a class="store" href="https://play.google.com/store/apps/details?id=com.aflcoach.afl_coach" rel="noopener"><small>Get it on</small><span>Google Play</span></a>
+      </div>
+      <p class="rating">Rated <b>4.6</b> out of 5 on the App Store.</p>
+      <ul class="pillars">
+        <li><h3>Run your club</h3><p>Recruit, draft, trade and train. Build a list that can go the distance over a long, brutal season, under a salary cap that bites.</p></li>
+        <li><h3>Coach the game</h3><p>Set your structures, tweak your magnets, make the team talk and tag their star. Live match day, quarter by quarter.</p></li>
+        <li><h3>Live the season</h3><p>Eighteen teams, round-by-round fixtures, the 2026 finals format with a wildcard round, the trade period, the draft. Then do it all again.</p></li>
+        <li><h3>Make the calls that matter</h3><p>Rest your stars or play them sore? Promote a kid or chase a veteran? The board is watching, and your job is never quite safe.</p></li>
+      </ul>
+    </div>
+    <div class="shots">
+      <div class="phone"><img src="img/fc-01_splash.jpg" loading="lazy" alt="Title screen with the pixel-art coach"></div>
+      <div class="phone"><img src="img/fc-08_match_day.jpg" loading="lazy" alt="Match day screen before Round 1, Hawks versus Magpies"></div>
+      <div class="phone"><img src="img/fc-06_draft.jpg" loading="lazy" alt="The national draft screen with available players"></div>
+      <div class="phone"><img src="img/fc-09_newspaper.jpg" loading="lazy" alt="A newspaper front page reporting on the weekend's match"></div>
+      <div class="phone"><img src="img/fc-10_ladder.jpg" loading="lazy" alt="The league ladder"></div>
+      <div class="phone"><img src="img/fc-04_squad.jpg" loading="lazy" alt="The squad list with player ratings and contracts"></div>
+    </div>
+  </div>
+  <p class="fineprint">Aussie Rules Footy Coach is an independent footy management sim. It is not affiliated with, endorsed by, or licensed by any official league, club, or competition. All teams, players and likenesses in the game are fictional.</p>
+</section>
+
+<section class="sec" id="paircall">
+  <div class="pc">
+    <div class="pc-copy">
+      <div class="pc-head">
+        <img src="img/paircall-icon.jpg" alt="" width="512" height="512">
+        <div>
+          <p class="eyebrow">App · iOS</p>
+          <h2>PairCall</h2>
+        </div>
+      </div>
+      <p class="lede">The catch-up call you both keep meaning to have, made automatic. Pair up with one person, agree on times, and at each check-in PairCall rings both phones like a real call. Answer, talk, done.</p>
+      <ul>
+        <li>Real calls at the times you chose, not another ignorable notification.</li>
+        <li>Video or voice. Skip a day or push a call back half an hour, and your partner sees it instantly.</li>
+        <li>An optional backup alarm that cuts through Do Not Disturb when a check-in is missed.</li>
+        <li>No accounts, no feeds, no tracking. Just a six-letter invite code and a person you care about.</li>
+      </ul>
+      <div class="stores">
+        <a class="store" href="https://apps.apple.com/au/app/paircall/id6787305022" rel="noopener"><small>Download on the</small><span>App Store</span></a>
+        <p class="soon">Android version in the works.</p>
+      </div>
+    </div>
+    <div class="pc-shots">
+      <div class="phone"><img src="img/paircall-1.jpg" loading="lazy" alt="PairCall home screen showing the next scheduled call"></div>
+      <div class="phone"><img src="img/paircall-2.jpg" loading="lazy" alt="PairCall schedule editor"></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="studio">
+  <div class="studio">
+    <div class="text">
+      <p class="eyebrow">The studio</p>
+      <h2>Built by fans, for fans</h2>
+      <p class="big">We're a small Australian studio with a simple idea: the best games come from people who genuinely love the thing they're making.</p>
+      <p>No corporate playbook, no chasing trends. Just deep, replayable games built by fans for fans, and the occasional small app that solves a problem we had ourselves.</p>
+      <p>Whether it's the strategy of a long footy season, the chaos of trade week, or the slow climb from wooden spoon to premiership, we care about the details that make a great sim worth coming back to. More is in the works.</p>
+    </div>
+    <div class="art">
+      <img class="pixel" src="img/fc-press.png" loading="lazy" alt="Pixel-art press conference: a scrum of reporters and cameras under studio lights" width="900" height="837">
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="contact">
+  <div class="contact">
+    <div class="intro">
+      <p class="eyebrow">Contact</p>
+      <h2>Say g'day</h2>
+      <p>Bug reports, feature ideas, press, or a trade offer we can't refuse. We read everything.</p>
+    </div>
+    <form class="cform" id="contact-form" novalidate>
+      <div class="row2">
+        <label>Name<input type="text" id="c-name" name="name" autocomplete="name" required></label>
+        <label>Email<input type="email" id="c-email" name="email" autocomplete="email" required></label>
+      </div>
+      <label>Message<textarea id="c-message" name="message" rows="4" required></textarea></label>
+      <label class="hp" aria-hidden="true">Leave this empty<input type="text" id="c-hp" name="_honey" tabindex="-1" autocomplete="off"></label>
+      <div class="foot">
+        <button type="submit" id="c-send">Send</button>
+        <p class="note" id="c-note" aria-live="polite"></p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Archie Games. The Trustee for ARC Trust.</p>
+  <nav>
+    <a href="privacy-policy/">Privacy policy</a>
+    <a href="#footy-coach">Footy Coach</a>
+    <a href="#paircall">PairCall</a>
+  </nav>
+</footer>
+
+<script>
+(function () {
+  var form = document.getElementById('contact-form');
+  if (!form) return;
+  var note = document.getElementById('c-note');
+  var btn = document.getElementById('c-send');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name = document.getElementById('c-name').value.trim();
+    var email = document.getElementById('c-email').value.trim();
+    var message = document.getElementById('c-message').value.trim();
+    if (!name || !email || !message) { note.textContent = 'Please fill in all three fields.'; return; }
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { note.textContent = 'That email address doesn’t look right.'; return; }
+    btn.disabled = true; note.textContent = 'Sending…';
+    fetch('https://formsubmit.co/ajax/47d061f372486788c5890cd717f3227b', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        name: name, email: email, message: message,
+        _honey: document.getElementById('c-hp').value,
+        _subject: 'Message from archiegames.com.au', _template: 'table', _captcha: 'false', _replyto: email
+      })
+    }).then(function (r) { return r.json(); }).then(function (d) {
+      if (d && String(d.success) === 'true') { form.reset(); note.textContent = 'Sent. Thanks, we’ll be in touch.'; }
+      else { throw new Error(); }
+    }).catch(function () {
+      btn.disabled = false; note.textContent = 'That didn’t send. Please try again in a moment.';
+    });
+  });
+})();
+</script>
+</body>
+</html>
